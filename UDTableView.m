@@ -79,6 +79,26 @@
 }
 
 
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    if ( [_realDataSource respondsToSelector:aSelector] ){
+        return YES;
+    }else if ( [_realDelegate respondsToSelector:aSelector] ){
+        return YES;
+    }
+    return [super respondsToSelector:aSelector];
+}
+
+
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    if ( [_realDataSource conformsToProtocol:aProtocol] ){
+        return YES;
+    }else if ( [_realDelegate conformsToProtocol:aProtocol] ){
+        return YES;
+    }
+    return [super conformsToProtocol:aProtocol];
+}
+
+
 #pragma mark -
 #pragma mark UITableView
 
@@ -152,8 +172,8 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // This shouldnt be neccecary, something wron with delegation
     NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
-#warning this not works because delegation dont work, same with scroll view
     return [_realDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
@@ -201,6 +221,8 @@
 
 
 - (void)ud_setAllowsMultipleSelectionDuringEditing:(BOOL)allowsMultipleSelectionDuringEditing {
+    if( _allowsMultipleSelectionDuringEditing == allowsMultipleSelectionDuringEditing ) return;
+    
     NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
     
     _allowsMultipleSelectionDuringEditing = _needsMultipleSelectionBackport = allowsMultipleSelectionDuringEditing;
