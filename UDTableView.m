@@ -142,7 +142,7 @@
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UITableViewScrollPosition)scrollPosition {
     
     if( _needsMultipleSelectionBackport && _allowsMultipleSelectionDuringEditing && self.isEditing && indexPath ){
-        NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
+        NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tselectRowAtIndexPath:animated:scrollPosition: shouldn't be called because iOS5+ natively supports multiselect");
         
         [_indexPathsForSelectedRows addObject:indexPath];
         [[self cellForRowAtIndexPath:indexPath] setSelected:YES animated:animated];
@@ -158,7 +158,7 @@
     if( !_needsMultipleSelectionBackport || !_allowsMultipleSelectionDuringEditing ){
         [super deselectRowAtIndexPath:indexPath animated:animated];
     }else if( _allowsMultipleSelectionDuringEditing && indexPath ){
-        NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
+        NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"deselectRowAtIndexPath:animated: shouldn't be called because iOS5+ natively supports multiselect");
         
         [_indexPathsForSelectedRows removeObject:indexPath];
         [[self cellForRowAtIndexPath:indexPath] setSelected:NO animated:animated];
@@ -183,7 +183,7 @@
 
 // Anyone knows why i can't forward it with forwardInvocation?
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
+    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"scrollViewDidScroll: shouldn't be called because iOS5+ natively supports multiselect");
     if( [_realDelegate respondsToSelector:@selector(scrollViewDidScroll:)] ){
         [_realDelegate scrollViewDidScroll:scrollView];
     }
@@ -207,7 +207,7 @@
 
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
+    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:willSelectRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
     
     if( [_indexPathsForSelectedRows containsObject:indexPath] ){
         [self deselectRowAtIndexPath:indexPath animated:NO];
@@ -222,7 +222,7 @@
 
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
+    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:willDeselectRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
     
     return nil;
 }
@@ -235,7 +235,7 @@
 - (void)ud_setAllowsMultipleSelectionDuringEditing:(BOOL)allowsMultipleSelectionDuringEditing {
     if( _allowsMultipleSelectionDuringEditing == allowsMultipleSelectionDuringEditing ) return;
     
-    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
+    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"ud_setAllowsMultipleSelectionDuringEditing: shouldn't be called because iOS5+ natively supports multiselect");
     
     _allowsMultipleSelectionDuringEditing = _needsMultipleSelectionBackport = allowsMultipleSelectionDuringEditing;
     if( _allowsMultipleSelectionDuringEditing ){
@@ -260,8 +260,6 @@
 
 - (NSArray *)indexPathsForSelectedRows {
     if( _needsMultipleSelectionBackport ){
-        NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
-        
         return [_indexPathsForSelectedRows allObjects];
     }else{
         return [super indexPathsForSelectedRows];
