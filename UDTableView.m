@@ -35,6 +35,14 @@
 }
 
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if( (self = [super initWithCoder:aDecoder]) ){
+        [self setAllowsMultipleSelectionDuringEditing: [aDecoder decodeBoolForKey:@"UIAllowsMultipleSelectionDuringEditing"]];
+    }
+    return self;
+}
+
+
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
     NSMethodSignature *methodSignature = nil;
     
