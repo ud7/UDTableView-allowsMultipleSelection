@@ -45,7 +45,7 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
     NSMethodSignature *methodSignature = nil;
-    
+
     if( [NSStringFromSelector(aSelector) isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
         methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];   
     }else if( [NSStringFromSelector(aSelector) isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
@@ -170,11 +170,23 @@
 #pragma mark -
 #pragma mark UITableViewDataSource
 
-
+// Anyone knows why i can't forward it with forwardInvocation?
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // This shouldnt be neccecary, something wron with delegation
     NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
     return [_realDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+}
+
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate
+
+
+// Anyone knows why i can't forward it with forwardInvocation?
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
+    if( [_realDelegate respondsToSelector:@selector(scrollViewDidScroll:)] ){
+        [_realDelegate scrollViewDidScroll:scrollView];
+    }
 }
 
 
