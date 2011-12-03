@@ -35,23 +35,11 @@
 }
 
 
-/*
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if( (self = [super initWithCoder:aDecoder]) ){
         [self setAllowsMultipleSelectionDuringEditing: [aDecoder decodeBoolForKey:@"UIAllowsMultipleSelectionDuringEditing"]];
-
-        NSLog(@"%@", [aDecoder decodeBoolForKey:@"dataSource"]);
-        
     }
     return self;
-}*/
-
-
-- (BOOL)respondsToSelector:(SEL)aSelector {
-    if( [NSStringFromSelector(aSelector) isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
-        return YES;
-    }
-    return [super respondsToSelector:aSelector];
 }
 
 
@@ -60,6 +48,8 @@
     
     if( [NSStringFromSelector(aSelector) isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
         methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];   
+    }else if( [NSStringFromSelector(aSelector) isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
+        methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_allowsMultipleSelectionDuringEditing)];   
     }else if ( [_realDataSource respondsToSelector:aSelector] ){
         methodSignature = [_realDataSource methodSignatureForSelector:aSelector];
     }else if ( [_realDelegate respondsToSelector:aSelector] ){
@@ -75,6 +65,9 @@
     
     if( [NSStringFromSelector(aSelector) isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
         [invocation setSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];
+        [invocation invokeWithTarget:self];
+    }else if( [NSStringFromSelector(aSelector) isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
+        [invocation setSelector:@selector(ud_allowsMultipleSelectionDuringEditing)];
         [invocation invokeWithTarget:self];
     }else if ( [_realDataSource respondsToSelector:aSelector] ){
         [invocation invokeWithTarget:_realDataSource];
@@ -223,6 +216,11 @@
         [self setDelegate:_realDelegate];
         [self setDataSource:_realDataSource];
     }
+}
+
+
+- (BOOL)ud_allowsMultipleSelectionDuringEditing {
+    return _allowsMultipleSelectionDuringEditing;
 }
 
 
