@@ -35,11 +35,23 @@
 }
 
 
+/*
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if( (self = [super initWithCoder:aDecoder]) ){
         [self setAllowsMultipleSelectionDuringEditing: [aDecoder decodeBoolForKey:@"UIAllowsMultipleSelectionDuringEditing"]];
+
+        NSLog(@"%@", [aDecoder decodeBoolForKey:@"dataSource"]);
+        
     }
     return self;
+}*/
+
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    if( [NSStringFromSelector(aSelector) isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
+        return YES;
+    }
+    return [super respondsToSelector:aSelector];
 }
 
 
@@ -148,7 +160,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
-    
+#warning this not works because delegation dont work, same with scroll view
     return [_realDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
@@ -176,6 +188,9 @@
         [self deselectRowAtIndexPath:indexPath animated:NO];
     }else{
         [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        if( [_realDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)] ){
+            [_realDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+        }
     }
     return nil;
 }
