@@ -12,6 +12,7 @@
 @interface UDTableView (UDPrivate)
 
 - (void)ud_setAllowsMultipleSelectionDuringEditing:(BOOL)allowsMultipleSelectionDuringEditing;
+- (BOOL)ud_allowsMultipleSelectionDuringEditing;
 
 @end
 
