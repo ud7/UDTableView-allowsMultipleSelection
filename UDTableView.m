@@ -62,26 +62,24 @@
 
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
-    NSMethodSignature *methodSignature = nil;
     NSString *aSelectorString = NSStringFromSelector(aSelector);
     
     if( [aSelectorString isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
-        methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];   
+        return [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];   
     }else if( [aSelectorString isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
-        methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_allowsMultipleSelectionDuringEditing)];   
+        return [[self class] instanceMethodSignatureForSelector:@selector(ud_allowsMultipleSelectionDuringEditing)];   
     }else if( [aSelectorString isEqualToString:@"setAllowsMultipleSelection:"] ){
-        methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelection:)];   
+        return [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelection:)];   
     }else if( [aSelectorString isEqualToString:@"allowsMultipleSelection"] ){
-        methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_allowsMultipleSelection)];   
+        return [[self class] instanceMethodSignatureForSelector:@selector(ud_allowsMultipleSelection)];   
     }
 
-    return methodSignature;
+    return nil;
 }
 
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
-    SEL aSelector = [invocation selector];
-    NSString *aSelectorString = NSStringFromSelector(aSelector);
+    NSString *aSelectorString = NSStringFromSelector([invocation selector]);
     
     if( [aSelectorString isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
         [invocation setSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];
@@ -96,28 +94,18 @@
         [invocation setSelector:@selector(ud_allowsMultipleSelection)];
         [invocation invokeWithTarget:self];
     }else{
-        [self doesNotRecognizeSelector:aSelector];
+        [self doesNotRecognizeSelector:[invocation selector]];
     }
 }
 
 
 - (BOOL)respondsToSelector:(SEL)aSelector {
-    if ( [_realDataSource respondsToSelector:aSelector] ){
-        return YES;
-    }else if ( [_realDelegate respondsToSelector:aSelector] ){
-        return YES;
-    }
-    return [super respondsToSelector:aSelector];
+    return ( [super respondsToSelector:aSelector] || [_realDataSource respondsToSelector:aSelector] || [_realDelegate respondsToSelector:aSelector] );
 }
 
 
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol {
-    if ( [_realDataSource conformsToProtocol:aProtocol] ){
-        return YES;
-    }else if ( [_realDelegate conformsToProtocol:aProtocol] ){
-        return YES;
-    }
-    return [super conformsToProtocol:aProtocol];
+    return ( [super conformsToProtocol:aProtocol] || [_realDataSource conformsToProtocol:aProtocol] || [_realDelegate conformsToProtocol:aProtocol] );
 }
 
 
