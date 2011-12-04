@@ -13,6 +13,8 @@
 
 - (void)ud_setAllowsMultipleSelectionDuringEditing:(BOOL)allowsMultipleSelectionDuringEditing;
 - (BOOL)ud_allowsMultipleSelectionDuringEditing;
+- (void)ud_setAllowsMultipleSelection:(BOOL)allowsMultipleSelection;
+- (BOOL)ud_allowsMultipleSelection;
 
 @end
 
