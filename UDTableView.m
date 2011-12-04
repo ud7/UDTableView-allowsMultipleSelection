@@ -44,6 +44,16 @@
 }
 
 
+- (id)forwardingTargetForSelector:(SEL)aSelector {
+    if ( [_realDataSource respondsToSelector:aSelector] ){
+        return _realDataSource;
+    }else if ( [_realDelegate respondsToSelector:aSelector] ){
+        return _realDelegate;
+    }
+    return self;
+}
+
+
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
     NSMethodSignature *methodSignature = nil;
 
@@ -51,10 +61,6 @@
         methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];   
     }else if( [NSStringFromSelector(aSelector) isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
         methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_allowsMultipleSelectionDuringEditing)];   
-    }else if ( [_realDataSource respondsToSelector:aSelector] ){
-        methodSignature = [_realDataSource methodSignatureForSelector:aSelector];
-    }else if ( [_realDelegate respondsToSelector:aSelector] ){
-        methodSignature = [_realDelegate methodSignatureForSelector:aSelector];
     }
 
     return methodSignature;
@@ -70,10 +76,6 @@
     }else if( [NSStringFromSelector(aSelector) isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
         [invocation setSelector:@selector(ud_allowsMultipleSelectionDuringEditing)];
         [invocation invokeWithTarget:self];
-    }else if ( [_realDataSource respondsToSelector:aSelector] ){
-        [invocation invokeWithTarget:_realDataSource];
-    }else if ( [_realDelegate respondsToSelector:aSelector] ){
-        [invocation invokeWithTarget:_realDelegate];
     }else{
         [self doesNotRecognizeSelector:aSelector];
     }
@@ -106,7 +108,9 @@
 
 - (void)setDataSource:(id<UITableViewDataSource>)dataSource {
     _realDataSource = dataSource;
-    if( !_needsMultipleSelectionBackport ){
+    if( _needsMultipleSelectionBackport ){
+        [super setDataSource:(id<UITableViewDataSource>)self];
+    }else{
         [super setDataSource:dataSource];
     }
 }
@@ -114,7 +118,9 @@
 
 - (void)setDelegate:(id<UITableViewDelegate>)delegate {
     _realDelegate = delegate;
-    if( !_needsMultipleSelectionBackport ){
+    if( _needsMultipleSelectionBackport ){
+        [super setDelegate:(id<UITableViewDelegate>)self];
+    }else{
         [super setDelegate:delegate];
     }
 }
@@ -165,29 +171,6 @@
         [[self cellForRowAtIndexPath:indexPath] setSelected:NO animated:animated];
     }
     
-}
-
-
-#pragma mark -
-#pragma mark UITableViewDataSource
-
-// Anyone knows why i can't forward it with forwardInvocation?
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tableView:cellForRowAtIndexPath: shouldn't be called because iOS5+ natively supports multiselect");
-    return [_realDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
-}
-
-
-#pragma mark -
-#pragma mark UIScrollViewDelegate
-
-
-// Anyone knows why i can't forward it with forwardInvocation?
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"scrollViewDidScroll: shouldn't be called because iOS5+ natively supports multiselect");
-    if( [_realDelegate respondsToSelector:@selector(scrollViewDidScroll:)] ){
-        [_realDelegate scrollViewDidScroll:scrollView];
-    }
 }
 
 
@@ -243,8 +226,8 @@
         [_indexPathsForSelectedRows release];
         _indexPathsForSelectedRows = [[NSMutableSet alloc] init];
         
-        [super setDataSource:(id<UITableViewDataSource>)self];
-        [super setDelegate:(id<UITableViewDelegate>)self];
+        if( super.dataSource ) [super setDataSource:(id<UITableViewDataSource>)self];
+        if( super.delegate ) [super setDelegate:(id<UITableViewDelegate>)self];
     }else{
         [_indexPathsForSelectedRows release], _indexPathsForSelectedRows = nil;
         
