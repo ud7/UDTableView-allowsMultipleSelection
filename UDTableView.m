@@ -19,8 +19,12 @@
 
 @implementation UDTableView {
     BOOL _allowsMultipleSelectionDuringEditing;
+    BOOL _allowsMultipleSelection;
+    
     BOOL _needsMultipleSelectionBackport;
+    
     NSMutableSet *_indexPathsForSelectedRows;
+    
     NSObject <UITableViewDataSource>*_realDataSource;
     NSObject <UITableViewDelegate>*_realDelegate;
 }
@@ -39,6 +43,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if( (self = [super initWithCoder:aDecoder]) ){
         [self setAllowsMultipleSelectionDuringEditing: [aDecoder decodeBoolForKey:@"UIAllowsMultipleSelectionDuringEditing"]];
+        [self setAllowsMultipleSelection: [aDecoder decodeBoolForKey:@"UIAllowsMultipleSelection"]];
     }
     return self;
 }
@@ -56,11 +61,16 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
     NSMethodSignature *methodSignature = nil;
-
-    if( [NSStringFromSelector(aSelector) isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
+    NSString *aSelectorString = NSStringFromSelector(aSelector);
+    
+    if( [aSelectorString isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
         methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];   
-    }else if( [NSStringFromSelector(aSelector) isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
+    }else if( [aSelectorString isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
         methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_allowsMultipleSelectionDuringEditing)];   
+    }else if( [aSelectorString isEqualToString:@"setAllowsMultipleSelection:"] ){
+        methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_setAllowsMultipleSelection:)];   
+    }else if( [aSelectorString isEqualToString:@"allowsMultipleSelection"] ){
+        methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(ud_allowsMultipleSelection)];   
     }
 
     return methodSignature;
@@ -69,12 +79,19 @@
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
     SEL aSelector = [invocation selector];
+    NSString *aSelectorString = NSStringFromSelector(aSelector);
     
-    if( [NSStringFromSelector(aSelector) isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
+    if( [aSelectorString isEqualToString:@"setAllowsMultipleSelectionDuringEditing:"] ){
         [invocation setSelector:@selector(ud_setAllowsMultipleSelectionDuringEditing:)];
         [invocation invokeWithTarget:self];
-    }else if( [NSStringFromSelector(aSelector) isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
+    }else if( [aSelectorString isEqualToString:@"allowsMultipleSelectionDuringEditing"] ){
         [invocation setSelector:@selector(ud_allowsMultipleSelectionDuringEditing)];
+        [invocation invokeWithTarget:self];
+    }else if( [aSelectorString isEqualToString:@"setAllowsMultipleSelection:"] ){
+        [invocation setSelector:@selector(ud_setAllowsMultipleSelection:)];
+        [invocation invokeWithTarget:self];
+    }else if( [aSelectorString isEqualToString:@"allowsMultipleSelection"] ){
+        [invocation setSelector:@selector(ud_allowsMultipleSelection)];
         [invocation invokeWithTarget:self];
     }else{
         [self doesNotRecognizeSelector:aSelector];
@@ -148,7 +165,7 @@
 
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UITableViewScrollPosition)scrollPosition {
     
-    if( _needsMultipleSelectionBackport && _allowsMultipleSelectionDuringEditing && self.isEditing && indexPath ){
+    if( _needsMultipleSelectionBackport && indexPath && ((_allowsMultipleSelectionDuringEditing && self.isEditing) || (_allowsMultipleSelection && !self.isEditing)) ){
         NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"tselectRowAtIndexPath:animated:scrollPosition: shouldn't be called because iOS5+ natively supports multiselect");
         
         [_indexPathsForSelectedRows addObject:indexPath];
@@ -242,6 +259,33 @@
 }
 
 
+- (void)ud_setAllowsMultipleSelection:(BOOL)allowsMultipleSelection {
+    if( _allowsMultipleSelection == allowsMultipleSelection ) return;
+    
+    NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"ud_setAllowsMultipleSelectionDuringEditing: shouldn't be called because iOS5+ natively supports multiselect");
+    
+    _allowsMultipleSelection = _needsMultipleSelectionBackport = allowsMultipleSelection;
+    if( _allowsMultipleSelection ){
+        [_indexPathsForSelectedRows release];
+        _indexPathsForSelectedRows = [[NSMutableSet alloc] init];
+        
+        if( super.dataSource ) [super setDataSource:(id<UITableViewDataSource>)self];
+        if( super.delegate ) [super setDelegate:(id<UITableViewDelegate>)self];
+    }else{
+        [_indexPathsForSelectedRows release], _indexPathsForSelectedRows = nil;
+        
+        [self setDelegate:_realDelegate];
+        [self setDataSource:_realDataSource];
+    }
+}
+
+
+- (BOOL)ud_allowsMultipleSelection {
+    return _allowsMultipleSelection;
+}
+
+
+
 - (NSArray *)indexPathsForSelectedRows {
     if( _needsMultipleSelectionBackport ){
         return [_indexPathsForSelectedRows allObjects];
@@ -251,5 +295,5 @@
 }
 
 
-@dynamic allowsMultipleSelectionDuringEditing;
+@dynamic allowsMultipleSelectionDuringEditing, allowsMultipleSelection;
 @end

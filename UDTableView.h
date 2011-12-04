@@ -13,5 +13,6 @@
 
 // Stupid iOS5-
 @property(nonatomic) BOOL allowsMultipleSelectionDuringEditing;
+@property(nonatomic) BOOL allowsMultipleSelection;
 
 @end
