@@ -2,7 +2,8 @@ UDTableView allowsMultipleSelection backport to pre iOS5
 =========
 
 tested on iOS3.0 (first gen iPhone)<br />
-tested on iOS4.2 (iPhone 3GS)
+tested on iOS4.2 (iPhone 3GS)<br />
+tested on iOS5.0 (iPhone 4)
 
 Pros
 ----------
