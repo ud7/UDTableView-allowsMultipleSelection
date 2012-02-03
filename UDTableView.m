@@ -181,6 +181,22 @@
 }
 
 
+- (void)setAllowsSelection:(BOOL)allowsSelection {
+    [super setAllowsSelection:allowsSelection];
+    if( _needsMultipleSelectionBackport && ![self allowsSelection] ){
+        [self setAllowsMultipleSelection:NO];
+    }
+}
+
+
+- (void)setAllowsSelectionDuringEditing:(BOOL)allowsSelectionDuringEditing {
+    [super setAllowsSelectionDuringEditing:allowsSelectionDuringEditing];
+    if( _needsMultipleSelectionBackport && ![self allowsSelectionDuringEditing] ){
+        [self setAllowsMultipleSelectionDuringEditing:NO];
+    }
+}
+
+
 #pragma mark -
 #pragma mark UITableViewDelegate
 
@@ -235,6 +251,8 @@
         
         if( super.dataSource ) [super setDataSource:(id<UITableViewDataSource>)self];
         if( super.delegate ) [super setDelegate:(id<UITableViewDelegate>)self];
+
+        [self setAllowsSelectionDuringEditing:YES];
     }else{
         [_indexPathsForSelectedRows release], _indexPathsForSelectedRows = nil;
         
@@ -261,6 +279,8 @@
         
         if( super.dataSource ) [super setDataSource:(id<UITableViewDataSource>)self];
         if( super.delegate ) [super setDelegate:(id<UITableViewDelegate>)self];
+        
+        [self setAllowsSelection:YES];
     }else{
         [_indexPathsForSelectedRows release], _indexPathsForSelectedRows = nil;
         
