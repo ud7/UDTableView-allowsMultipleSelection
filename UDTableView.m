@@ -218,6 +218,9 @@
     
     if( [_indexPathsForSelectedRows containsObject:indexPath] ){
         [self deselectRowAtIndexPath:indexPath animated:NO];
+    	if( [_realDelegate respondsToSelector:@selector(tableView:didDeselectRowAtIndexPath:)] ){
+            [_realDelegate tableView:tableView didDeselectRowAtIndexPath:indexPath];
+        }        
     }else{
         [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         if( [_realDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)] ){
