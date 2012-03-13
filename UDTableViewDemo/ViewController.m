@@ -38,7 +38,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    // NOTE: doesn't properly work when allowsMultipleSelection=YES & allowsMultipleSelectionDuringEditing=NO
+    // NOTE: now it's working!
     self.tableView.allowsMultipleSelection = YES;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
