@@ -169,13 +169,13 @@
 
 - (void)deselectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
  
-    if( !_needsMultipleSelectionBackport || !_allowsMultipleSelectionDuringEditing ){
-        [super deselectRowAtIndexPath:indexPath animated:animated];
-    }else if( _allowsMultipleSelectionDuringEditing && indexPath ){
+    if( _needsMultipleSelectionBackport && indexPath && ((_allowsMultipleSelectionDuringEditing && self.isEditing) || (_allowsMultipleSelection && !self.isEditing)) ){
         NSAssert(( &UIApplicationLaunchOptionsNewsstandDownloadsKey == NULL ), @"deselectRowAtIndexPath:animated: shouldn't be called because iOS5+ natively supports multiselect");
         
         [_indexPathsForSelectedRows removeObject:indexPath];
         [[self cellForRowAtIndexPath:indexPath] setSelected:NO animated:animated];
+    }else {
+        [super deselectRowAtIndexPath:indexPath animated:animated];
     }
     
 }
