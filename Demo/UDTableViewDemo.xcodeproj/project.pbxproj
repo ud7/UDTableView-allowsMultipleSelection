@@ -10,11 +10,11 @@
 		4894CC1F150F45DD0069AADD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894CC1E150F45DD0069AADD /* UIKit.framework */; };
 		4894CC21150F45DD0069AADD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894CC20150F45DD0069AADD /* Foundation.framework */; };
 		4894CC23150F45DD0069AADD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4894CC22150F45DD0069AADD /* CoreGraphics.framework */; };
-		4894CC29150F45DD0069AADD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4894CC27150F45DD0069AADD /* InfoPlist.strings */; };
 		4894CC2B150F45DD0069AADD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4894CC2A150F45DD0069AADD /* main.m */; };
-		4894CC2F150F45DD0069AADD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4894CC2E150F45DD0069AADD /* AppDelegate.m */; };
-		4894CC32150F45DD0069AADD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4894CC31150F45DD0069AADD /* ViewController.m */; };
-		4894CC41150F463C0069AADD /* UDTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4894CC40150F463C0069AADD /* UDTableView.m */; };
+		F0AED1721511C3FD00E578CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F0AED16F1511C3FD00E578CC /* README.md */; };
+		F0AED1731511C3FD00E578CC /* UDTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AED1711511C3FD00E578CC /* UDTableView.m */; };
+		F0AED1801511C58A00E578CC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AED17A1511C58A00E578CC /* AppDelegate.m */; };
+		F0AED1811511C58A00E578CC /* YIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AED17D1511C58A00E578CC /* YIViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,16 +22,16 @@
 		4894CC1E150F45DD0069AADD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4894CC20150F45DD0069AADD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4894CC22150F45DD0069AADD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4894CC26150F45DD0069AADD /* UDTableViewDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UDTableViewDemo-Info.plist"; sourceTree = "<group>"; };
-		4894CC28150F45DD0069AADD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4894CC2A150F45DD0069AADD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4894CC2C150F45DD0069AADD /* UDTableViewDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UDTableViewDemo-Prefix.pch"; sourceTree = "<group>"; };
-		4894CC2D150F45DD0069AADD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		4894CC2E150F45DD0069AADD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4894CC30150F45DD0069AADD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4894CC31150F45DD0069AADD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		4894CC3F150F463C0069AADD /* UDTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDTableView.h; sourceTree = "<group>"; };
-		4894CC40150F463C0069AADD /* UDTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDTableView.m; sourceTree = "<group>"; };
+		4894CC2C150F45DD0069AADD /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		F0AED16F1511C3FD00E578CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F0AED1701511C3FD00E578CC /* UDTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDTableView.h; path = ../UDTableView.h; sourceTree = "<group>"; };
+		F0AED1711511C3FD00E578CC /* UDTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDTableView.m; path = ../UDTableView.m; sourceTree = "<group>"; };
+		F0AED1791511C58A00E578CC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F0AED17A1511C58A00E578CC /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F0AED17C1511C58A00E578CC /* YIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = YIViewController.h; sourceTree = "<group>"; };
+		F0AED17D1511C58A00E578CC /* YIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YIViewController.m; sourceTree = "<group>"; };
+		F0AED17F1511C58A00E578CC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +51,9 @@
 		4894CC0F150F45DD0069AADD = {
 			isa = PBXGroup;
 			children = (
-				4894CC3F150F463C0069AADD /* UDTableView.h */,
-				4894CC40150F463C0069AADD /* UDTableView.m */,
-				4894CC24150F45DD0069AADD /* UDTableViewDemo */,
+				F0AED1781511C58A00E578CC /* Classes */,
+				F0AED17E1511C58A00E578CC /* Resources */,
+				4894CC25150F45DD0069AADD /* Supporting Files */,
 				4894CC1D150F45DD0069AADD /* Frameworks */,
 				4894CC1B150F45DD0069AADD /* Products */,
 			);
@@ -77,27 +77,55 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4894CC24150F45DD0069AADD /* UDTableViewDemo */ = {
-			isa = PBXGroup;
-			children = (
-				4894CC2D150F45DD0069AADD /* AppDelegate.h */,
-				4894CC2E150F45DD0069AADD /* AppDelegate.m */,
-				4894CC30150F45DD0069AADD /* ViewController.h */,
-				4894CC31150F45DD0069AADD /* ViewController.m */,
-				4894CC25150F45DD0069AADD /* Supporting Files */,
-			);
-			path = UDTableViewDemo;
-			sourceTree = "<group>";
-		};
 		4894CC25150F45DD0069AADD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4894CC26150F45DD0069AADD /* UDTableViewDemo-Info.plist */,
-				4894CC27150F45DD0069AADD /* InfoPlist.strings */,
 				4894CC2A150F45DD0069AADD /* main.m */,
-				4894CC2C150F45DD0069AADD /* UDTableViewDemo-Prefix.pch */,
+				4894CC2C150F45DD0069AADD /* Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = UDTableViewDemo;
+			sourceTree = "<group>";
+		};
+		F0AED16E1511C3EF00E578CC /* UDTableView */ = {
+			isa = PBXGroup;
+			children = (
+				F0AED16F1511C3FD00E578CC /* README.md */,
+				F0AED1701511C3FD00E578CC /* UDTableView.h */,
+				F0AED1711511C3FD00E578CC /* UDTableView.m */,
+			);
+			name = UDTableView;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		F0AED1781511C58A00E578CC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F0AED16E1511C3EF00E578CC /* UDTableView */,
+				F0AED17B1511C58A00E578CC /* Controller */,
+				F0AED1791511C58A00E578CC /* AppDelegate.h */,
+				F0AED17A1511C58A00E578CC /* AppDelegate.m */,
+			);
+			name = Classes;
+			path = UDTableViewDemo/Classes;
+			sourceTree = "<group>";
+		};
+		F0AED17B1511C58A00E578CC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F0AED17C1511C58A00E578CC /* YIViewController.h */,
+				F0AED17D1511C58A00E578CC /* YIViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F0AED17E1511C58A00E578CC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F0AED17F1511C58A00E578CC /* Info.plist */,
+			);
+			name = Resources;
+			path = UDTableViewDemo/Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,7 +179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4894CC29150F45DD0069AADD /* InfoPlist.strings in Resources */,
+				F0AED1721511C3FD00E578CC /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,24 +191,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4894CC2B150F45DD0069AADD /* main.m in Sources */,
-				4894CC2F150F45DD0069AADD /* AppDelegate.m in Sources */,
-				4894CC32150F45DD0069AADD /* ViewController.m in Sources */,
-				4894CC41150F463C0069AADD /* UDTableView.m in Sources */,
+				F0AED1731511C3FD00E578CC /* UDTableView.m in Sources */,
+				F0AED1801511C58A00E578CC /* AppDelegate.m in Sources */,
+				F0AED1811511C58A00E578CC /* YIViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4894CC27150F45DD0069AADD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4894CC28150F45DD0069AADD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4894CC36150F45DD0069AADD /* Debug */ = {
@@ -188,7 +205,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -198,11 +215,24 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -212,15 +242,28 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -230,9 +273,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UDTableViewDemo/UDTableViewDemo-Prefix.pch";
-				INFOPLIST_FILE = "UDTableViewDemo/UDTableViewDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				GCC_PREFIX_HEADER = UDTableViewDemo/Prefix.pch;
+				INFOPLIST_FILE = UDTableViewDemo/Resources/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -242,9 +284,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UDTableViewDemo/UDTableViewDemo-Prefix.pch";
-				INFOPLIST_FILE = "UDTableViewDemo/UDTableViewDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				GCC_PREFIX_HEADER = UDTableViewDemo/Prefix.pch;
+				INFOPLIST_FILE = UDTableViewDemo/Resources/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

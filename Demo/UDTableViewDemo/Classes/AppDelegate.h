@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  AppDelegate.h
 //  UDTableViewDemo
 //
 //  Created by Yasuhiro Inami on 12/03/13.
@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ViewController : UITableViewController
-
-@property (nonatomic, retain) NSArray* dataStrings;
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @end
